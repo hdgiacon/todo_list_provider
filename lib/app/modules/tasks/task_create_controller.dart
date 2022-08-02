@@ -36,4 +36,30 @@ class TaskCreateController extends DefaultChangeNotifier {
       notifyListeners();
     }
   }
+
+  Future<void> deleteAllTasks() async {
+    // TODO: o erro pode estar aqui
+    try {
+      await _tasksService.deleteAllTasks();
+    } catch (e, s) {
+      log('', error: e, stackTrace: s);
+      setError('Erro ao deletar todas as tasks');
+    }
+    //finally {
+    //  notifyListeners();
+    //}
+  }
+
+  Future<void> deleteTask(DateTime date) async {
+    try {
+      showLoading();
+      await _tasksService.deleteTask(date);
+    } catch (e, s) {
+      log('', error: e, stackTrace: s);
+      setError('Erro ao deletar a task selecionada');
+    } finally {
+      hideLoading();
+      notifyListeners();
+    }
+  }
 }

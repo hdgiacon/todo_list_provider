@@ -3,15 +3,20 @@ import 'package:provider/provider.dart';
 import 'package:todo_list_provider/app/core/auth/auth_provider.dart';
 import 'package:todo_list_provider/app/core/ui/messages.dart';
 import 'package:todo_list_provider/app/core/ui/theme_extensions.dart';
+import 'package:todo_list_provider/app/modules/tasks/task_create_controller.dart';
 import 'package:todo_list_provider/app/services/user/user_service.dart';
 
 class HomeDrawer extends StatelessWidget {
   final nameVN = ValueNotifier<String>('');
 
-  HomeDrawer({Key? key}) : super(key: key);
+  HomeDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    _popNavigator() {
+      Navigator.of(context).pop();
+    }
+
     return Drawer(
       child: ListView(
         children: [
@@ -78,7 +83,7 @@ class HomeDrawer extends StatelessWidget {
                             await context
                                 .read<UserService>()
                                 .updateDisplayName(nameVN.value);
-                            Navigator.of(context).pop();
+                            _popNavigator();
                           }
                         },
                         child: const Text('Alterar'),
@@ -91,7 +96,10 @@ class HomeDrawer extends StatelessWidget {
             title: const Text('Alterar nome'),
           ),
           ListTile(
-            onTap: () => context.read<AuthProvider>().logout(),
+            onTap: () {
+              context.read<TaskCreateController>().deleteAllTasks();
+              context.read<AuthProvider>().logout();
+            },
             title: const Text('Sair'),
           )
         ],

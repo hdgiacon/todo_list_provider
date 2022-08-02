@@ -122,6 +122,7 @@ class UserRepositoryImpl implements UserRepository {
         throw AuthException(message: 'Erro ao realizar login');
       }
     }
+    return null;
   }
 
   @override

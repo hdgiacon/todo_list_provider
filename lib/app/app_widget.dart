@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:todo_list_provider/app/core/database/sqlite_adm_connection.dart';
@@ -23,7 +23,7 @@ class _AppWidgetState extends State<AppWidget> {
   void initState() {
     super.initState();
 
-    FirebaseAuth auth = FirebaseAuth.instance;
+    //FirebaseAuth auth = FirebaseAuth.instance;  TODO: ver se funciona sem isso
 
     WidgetsBinding.instance
         .addObserver(sqliteAdmConnection); // não precisa do ? em instance

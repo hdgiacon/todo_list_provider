@@ -33,6 +33,9 @@ class TodoDardFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentTasks = (totalTasksModel?.totalTasks ?? 0) -
+        (totalTasksModel?.totalTasksFinish ?? 0);
+
     return InkWell(
       borderRadius: BorderRadius.circular(30.0),
       onTap: () => context.read<HomeController>().findTasks(filter: taskFilter),
@@ -55,7 +58,7 @@ class TodoDardFilter extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '${totalTasksModel?.totalTasks ?? 0} TASKS',
+              '$currentTasks TASKS',
               style: context.titleStyle.copyWith(
                 fontSize: 10.0,
                 color: selected ? Colors.white : Colors.grey,
